@@ -1,0 +1,44 @@
+# Builds the arm64 release APK and attaches it to a GitHub Release whenever
+# a v* tag is pushed, e.g.:  git tag v0.1.0-pre-event && git push --tags
+name: release-apk
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      # fllama compiles llama.cpp through CMake during the build
+      - name: Install CMake + Ninja
+        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build
+
+      - run: flutter pub get
+
+      - run: flutter build apk --release --target-platform android-arm64
+
+      - name: Rename APK
+        run: cp build/app/outputs/flutter-apk/app-release.apk sahayak-${{ github.ref_name }}-arm64.apk
+
+      - name: Attach APK to release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: sahayak-*.apk
+          generate_release_notes: true
