@@ -105,7 +105,7 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: 16),
               Text(
                 'Screening support only — never a diagnosis.\n'
-                'Built phone-first for the iQOO Hackathon 2026.',
+                'Built phone-first',
                 style: Theme.of(context).textTheme.bodySmall,
                 textAlign: TextAlign.center,
               ),

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sahayak — Phase 1 Submission</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; color: #1a1a1a; }
+  .page {
+    width: 210mm; min-height: 297mm; padding: 18mm 20mm 16mm;
+    page-break-after: always; position: relative; background: #fff;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  /* ---------- typography ---------- */
+  h2 { font-size: 21px; color: #00584e; margin-bottom: 4mm; letter-spacing: -0.02em; }
+  h3 { font-size: 13.5px; margin: 5mm 0 2mm; color: #1a1a1a; }
+  p, li { font-size: 11.2px; line-height: 1.55; }
+  p + p { margin-top: 2.5mm; }
+  ul { margin: 2mm 0 2mm 5mm; }
+  li { margin-bottom: 1.6mm; }
+  b { color: #00584e; }
+  .lede { font-size: 12.5px; line-height: 1.55; color: #333; }
+  .kicker {
+    font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #8a6d1f; font-weight: 700; margin-bottom: 2mm;
+  }
+  .footer {
+    position: absolute; bottom: 9mm; left: 20mm; right: 20mm;
+    font-size: 8.5px; color: #999; display: flex; justify-content: space-between;
+    border-top: 0.5px solid #ddd; padding-top: 2mm;
+  }
+
+  /* ---------- cover ---------- */
+  .cover { display: flex; flex-direction: column; justify-content: space-between;
+           background: linear-gradient(160deg, #fff 60%, #f2f7f6 100%); }
+  .cover-top { padding-top: 8mm; }
+  .badge-row { display: flex; gap: 3mm; margin-bottom: 14mm; }
+  .badge {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 1.6mm 3.5mm; border-radius: 99px; border: 1px solid #00584e; color: #00584e;
+  }
+  .badge.solid { background: #00584e; color: #fff; }
+  .cover h1 { font-size: 64px; letter-spacing: -0.03em; color: #0d0d0d; }
+  .cover .tagline { font-size: 20px; color: #00584e; margin-top: 3mm; font-weight: 500; }
+  .cover .promise {
+    margin-top: 12mm; font-size: 13px; line-height: 1.6; color: #333; max-width: 150mm;
+  }
+  .cover .promise b { color: #0d0d0d; }
+  .proof-strip {
+    margin-top: 12mm; border: 1px solid #cfe0dd; border-radius: 3mm; padding: 5mm 6mm;
+    background: #fff;
+  }
+  .proof-strip .kicker { color: #00584e; margin-bottom: 2.5mm; }
+  .proof-strip p { font-size: 11px; }
+  .cover-links { font-size: 10.5px; color: #444; line-height: 1.8; }
+  .cover-links code { font-family: "SF Mono", Menlo, monospace; font-size: 10px; color: #00584e; }
+
+  /* ---------- components ---------- */
+  table { width: 100%; border-collapse: collapse; margin: 3mm 0; }
+  th { text-align: left; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
+       color: #666; padding: 1.8mm 2.5mm; border-bottom: 1.5px solid #00584e; }
+  td { font-size: 10.6px; line-height: 1.45; padding: 2.2mm 2.5mm; border-bottom: 0.5px solid #e2e2e2;
+       vertical-align: top; }
+  .chip { display: inline-block; font-size: 8.5px; font-weight: 700; padding: 0.8mm 2.2mm;
+          border-radius: 99px; white-space: nowrap; }
+  .chip.built { background: #e0f0ea; color: #00584e; }
+  .chip.plan  { background: #fdf3d7; color: #8a6d1f; }
+  .callout {
+    border-left: 3px solid #00584e; background: #f2f7f6; padding: 3.5mm 5mm;
+    margin: 4mm 0; border-radius: 0 2mm 2mm 0;
+  }
+  .callout p { font-size: 11px; }
+  .two-col { display: flex; gap: 8mm; }
+  .two-col > div { flex: 1; }
+
+  /* ---------- architecture diagram ---------- */
+  .arch { margin: 4mm 0; }
+  .arch-box {
+    border: 1.2px solid #00584e; border-radius: 2mm; padding: 2.6mm 4mm; text-align: center;
+    font-size: 10.5px; background: #fff;
+  }
+  .arch-box b { display: block; font-size: 11px; }
+  .arch-box .sub { font-size: 9px; color: #666; margin-top: 0.5mm; }
+  .arch-box.hero { background: #00584e; color: #fff; }
+  .arch-box.hero b, .arch-box.hero .sub { color: #fff; }
+  .arch-connector { text-align: center; font-size: 10px; color: #00584e; line-height: 1.1; padding: 1.2mm 0; }
+  .arch-split { display: flex; gap: 5mm; margin-top: 1.2mm; }
+  .arch-split > div { flex: 1; }
+  .arch-note { font-size: 9px; color: #666; text-align: center; margin-top: 1.5mm; }
+</style>
+</head>
+<body>
+
+<!-- ================= COVER ================= -->
+<div class="page cover">
+  <div class="cover-top">
+    <div class="badge-row">
+      <span class="badge solid">iQOO Hackathon 2026</span>
+      <span class="badge">Hyderabad City Battle</span>
+      <span class="badge">Track · HealthTech</span>
+      <span class="badge">Phase 1 Submission</span>
+    </div>
+    <h1>Sahayak</h1>
+    <div class="tagline">An offline AI health worker in every pocket</div>
+    <p class="promise">
+      Camera + voice + a language model running <b>fully on the phone</b> —
+      no internet, no per-query cost, no health data leaving the device.
+      Built for India's ~1&nbsp;million ASHA community health workers and the
+      villages they serve at zero bars.
+    </p>
+    <div class="proof-strip">
+      <div class="kicker">This is not just an idea</div>
+      <p><b>A working prototype ships with this submission.</b> Installable APK,
+      real on-device AI inference (llama.cpp), camera-to-voice chain working
+      end-to-end. Our demo runs with airplane mode ON.</p>
+    </div>
+  </div>
+  <div class="cover-links">
+    <b>Repository:</b> <code>github.com/Yeswant369/sahayak</code> &nbsp;·&nbsp;
+    <b>APK:</b> <code>Releases → v0.1.0 (arm64)</code><br>
+    <b>Prototype video:</b> linked on the submission form &nbsp;·&nbsp;
+    September 2026
+  </div>
+</div>
+
+<!-- ================= PAGE 2 : PROBLEM + SOLUTION ================= -->
+<div class="page">
+  <div class="kicker">01 · The problem</div>
+  <h2>The last mile of healthcare has no signal</h2>
+  <p class="lede">
+    India's rural healthcare runs on ~1 million ASHA workers — community health
+    workers who walk village to village with paper forms, no diagnostic
+    support, and often no network coverage at all. The patients they serve,
+    many with low literacy, misread medicine labels, miss danger signs, and
+    travel hours to a Primary Health Centre for questions a trained assistant
+    could answer on the spot.
+  </p>
+  <h3>Why cloud AI cannot fix this</h3>
+  <ul>
+    <li><b>No connectivity.</b> Village visits happen at zero bars. A chatbot that needs the internet is useless exactly where it is needed most.</li>
+    <li><b>No budget.</b> Per-query API costs do not scale to a million workers making daily visits.</li>
+    <li><b>No trust.</b> Health conversations are private. Data leaving the phone is an adoption barrier — and a real risk.</li>
+  </ul>
+
+  <div class="kicker" style="margin-top:8mm">02 · The solution</div>
+  <h2>The phone already in every pocket, made clinical</h2>
+  <p>Sahayak uses the three things every Android phone already has — a camera,
+  a microphone, and enough compute for a small language model — to put an
+  offline AI assistant in the field. Everything runs on-device.</p>
+  <table>
+    <tr><th style="width:31mm">Module</th><th>What it does</th><th style="width:30mm">Status</th></tr>
+    <tr>
+      <td><b>Medicine Lens</b></td>
+      <td>Point the camera at any medicine strip or prescription → the phone reads it (on-device OCR) and <b>speaks</b> what it is, the printed dosage, and warnings — English, Hindi, or Telugu.</td>
+      <td><span class="chip built">✓ BUILT — IN PROTOTYPE</span></td>
+    </tr>
+    <tr>
+      <td><b>Voice Triage</b></td>
+      <td>The patient describes symptoms by voice → on-device AI returns a cautious screening result: urgency (green/amber/red), practical advice, and a ready-to-read <b>referral note</b> for the PHC.</td>
+      <td><span class="chip built">✓ BUILT — IN PROTOTYPE</span></td>
+    </tr>
+    <tr>
+      <td><b>Model Manager<br>+ Prompt Lab</b></td>
+      <td>Hot-swap any open-source model at runtime; tune and test prompts on the phone itself, with live tokens/sec.</td>
+      <td><span class="chip built">✓ BUILT — IN PROTOTYPE</span></td>
+    </tr>
+    <tr>
+      <td><b>Camera screening</b></td>
+      <td>Reference-band mid-upper-arm check for child malnutrition screening.</td>
+      <td><span class="chip plan">30-HOUR BUILD</span></td>
+    </tr>
+    <tr>
+      <td><b>Auto-filled paperwork</b></td>
+      <td>The visit transcript auto-populates the government health form; PDF export; syncs when network appears.</td>
+      <td><span class="chip plan">30-HOUR BUILD</span></td>
+    </tr>
+  </table>
+  <div class="footer"><span>Sahayak · Phase 1 · iQOO Hackathon 2026</span><span>2 / 6</span></div>
+</div>
+
+<!-- ================= PAGE 3 : PROOF ================= -->
+<div class="page">
+  <div class="kicker">03 · Proof</div>
+  <h2>We de-risked the idea before asking you to bet on it</h2>
+  <p class="lede">We didn't just write this deck — we built the risky parts
+  first. The repository and an installable APK are linked on the cover page.</p>
+
+  <h3>Working today, verifiable by anyone</h3>
+  <ul>
+    <li><b>Full chain, end to end:</b> camera → on-device OCR (ML&nbsp;Kit) → local
+        LLM (llama.cpp) → spoken answer (TTS). Voice input → structured triage
+        JSON → urgency verdict → spoken advice.</li>
+    <li><b>Real on-device inference:</b> any open-source GGUF model — Qwen3 0.6B,
+        Gemma, IBM Granite Nano, Sarvam-1 — imports at runtime and runs locally.
+        <b>There is no API key anywhere in the codebase.</b></li>
+    <li><b>Measured, not promised:</b> the in-app Prompt Lab shows live
+        tokens-per-second for every run.</li>
+    <li><b>Installable now:</b> 62&nbsp;MB arm64 release APK on the GitHub release,
+        rebuilt by CI on every version tag.</li>
+  </ul>
+
+  <div class="callout">
+    <p><b>Transparency by design:</b> this prototype is our pre-event
+    feasibility spike. Our last commit before the battle will be tagged
+    <b>pre-event</b>, so judges can diff exactly what was created during the
+    30 hours. We want the before/after to be checkable.</p>
+  </div>
+
+  <h3>What the prototype proves</h3>
+  <table>
+    <tr><th>Risk most teams discover at hour 20</th><th>Our status</th></tr>
+    <tr><td>Can a quantized LLM actually load and run on an Android phone, offline?</td><td>Proven — llama.cpp via FFI, GGUF import at runtime</td></tr>
+    <tr><td>Can OCR read real medicine packaging reliably enough to be useful?</td><td>Proven — on-device ML Kit, editable text fallback in UI</td></tr>
+    <tr><td>Does voice in / voice out work in Indian languages?</td><td>Working — platform STT/TTS wired for en-IN / hi-IN / te-IN; Whisper-class STT is a battle upgrade</td></tr>
+    <tr><td>Will the app build and ship?</td><td>Proven — release APK builds clean in CI and locally</td></tr>
+  </table>
+  <div class="footer"><span>Sahayak · Phase 1 · iQOO Hackathon 2026</span><span>3 / 6</span></div>
+</div>
+
+<!-- ================= PAGE 4 : ARCHITECTURE ================= -->
+<div class="page">
+  <div class="kicker">04 · Technical blueprint</div>
+  <h2>Model-agnostic, low-end-first architecture</h2>
+
+  <div class="arch">
+    <div class="arch-box"><b>Flutter UI · Material 3</b><div class="sub">English · हिंदी · తెలుగు — voice-first, low-literacy-friendly</div></div>
+    <div class="arch-connector">▼</div>
+    <div class="arch-box hero"><b>ModelEngine interface</b><div class="sub">screens never know which model is running — swap = file import, not refactor</div></div>
+    <div class="arch-connector">▼</div>
+    <div class="arch-box"><b>llama.cpp via Dart FFI</b><div class="sub">runs ANY GGUF: Qwen · Gemma · Granite Nano · MiniCPM · Sarvam-1 — chat template auto-applied from GGUF metadata</div></div>
+    <div class="arch-split">
+      <div>
+        <div class="arch-connector">▼</div>
+        <div class="arch-box"><b>Perception</b><div class="sub">ML Kit OCR (on-device) · speech-to-text</div></div>
+      </div>
+      <div>
+        <div class="arch-connector">▼</div>
+        <div class="arch-box"><b>Output &amp; data</b><div class="sub">3-language TTS · local-only storage</div></div>
+      </div>
+    </div>
+    <div class="arch-note">Every box runs on the phone. Nothing above requires a network connection.</div>
+  </div>
+
+  <h3>One APK from ₹8,000 phones to the iQOO 15</h3>
+  <p>ASHA workers don't carry flagships — so inference is CPU-first (runs on
+  any Android), with GPU/NPU acceleration as a bonus where the silicon exists.
+  The app picks the model tier for the device:</p>
+  <table>
+    <tr><th>Device class</th><th>Model tier (Q4 quantized)</th></tr>
+    <tr><td>3–4 GB RAM (entry phones)</td><td>0.3–1B — Qwen3 0.6B, Granite Nano, Gemma 1B</td></tr>
+    <tr><td>6–8 GB RAM</td><td>1–2B — Gemma 2B, <b>Sarvam-1 2B</b> (open model built for 10 Indic languages)</td></tr>
+    <tr><td>Flagship — <b>iQOO 15</b></td><td>2–4B models; Snapdragon GPU/NPU acceleration (ONNX Runtime QNN path) targeted during the battle</td></tr>
+  </table>
+
+  <div class="callout">
+    <p><b>Why on-device AI is necessary here, not a gimmick:</b> offline
+    villages + private health data means local inference is the <i>only</i>
+    architecture that works. Cloud isn't a cheaper alternative we skipped —
+    it's a disqualifying dependency we removed.</p>
+  </div>
+  <div class="footer"><span>Sahayak · Phase 1 · iQOO Hackathon 2026</span><span>4 / 6</span></div>
+</div>
+
+<!-- ================= PAGE 5 : FORMAT FIT + PLAN ================= -->
+<div class="page">
+  <div class="kicker">05 · Built for this hackathon's format</div>
+  <h2>The details most teams will miss</h2>
+  <ul>
+    <li><b>Phone-only build windows are productive for us, by design.</b>
+        The in-app <b>Prompt Lab</b> lets us tune prompts, swap models, and
+        measure tokens/sec on the phone itself. Red Light hours become our
+        tuning and field-testing hours, not dead time.</li>
+    <li><b>Office Kit in the loop, not bolted on.</b> Green Light development
+        runs through phone–laptop bridging: file transfer for GGUF models,
+        clipboard for prompts, screen mirror for live debugging — the exact
+        workflow this format is designed to showcase.</li>
+    <li><b>A demo that cannot be faked.</b> Airplane mode ON, in front of the
+        judges: scan a real medicine strip — the phone speaks in Telugu.
+        Describe symptoms — urgency verdict and referral note, out loud.
+        ~90 seconds, no Wi-Fi, no excuses.</li>
+    <li><b>Native feel.</b> Material 3, big-tap targets, voice-first flows
+        designed for the actual end user — a health worker in the sun, not a
+        developer at a desk.</li>
+  </ul>
+
+  <h3>The 30-hour battle plan</h3>
+  <table>
+    <tr><th style="width:26mm">Hours</th><th>Work</th></tr>
+    <tr><td>0 – 6</td><td>NPU acceleration on the iQOO 15; Sarvam-1 2B as default Indic model; field-tune triage prompts on-device via Prompt Lab</td></tr>
+    <tr><td>6 – 16</td><td>ASHA visit workflow: patient record → auto-filled government health form → PDF export; offline-first sync stub</td></tr>
+    <tr><td>16 – 24</td><td>Camera screening module (reference-band malnutrition check); Telugu/Hindi voice polish</td></tr>
+    <tr><td>24 – 30</td><td>End-to-end rehearsal on the iQOO 15; on-device vs. cloud latency benchmark; demo recording; pitch</td></tr>
+  </table>
+
+  <div class="callout">
+    <p><b>Why this plan is credible:</b> the risky plumbing — local inference,
+    OCR, voice I/O, APK pipeline — is already working in the prototype. The
+    battle adds features to a proven foundation, not hope to a blank repo.</p>
+  </div>
+  <div class="footer"><span>Sahayak · Phase 1 · iQOO Hackathon 2026</span><span>5 / 6</span></div>
+</div>
+
+<!-- ================= PAGE 6 : IMPACT + SAFETY + CLOSE ================= -->
+<div class="page">
+  <div class="kicker">06 · Impact</div>
+  <h2>Zero marginal cost is the unlock</h2>
+  <div class="two-col">
+    <div>
+      <h3 style="margin-top:0">The wedge</h3>
+      <p>Medicine explanation + triage support for ASHA workers in Telangana —
+      a concrete, reachable first user group we can test with directly.</p>
+      <h3>The scale</h3>
+      <p>~1M ASHA workers × multiple home visits a day = tens of millions of
+      assisted interactions per month — with <b>no cloud bill standing between
+      this and national scale</b>, because every query runs on hardware people
+      already own.</p>
+    </div>
+    <div>
+      <h3 style="margin-top:0">Beyond ASHA</h3>
+      <p>The same offline engine serves elders living alone, low-literacy
+      patients, and any rural household: an AI health assistant that works
+      precisely because it <i>doesn't</i> need the internet.</p>
+      <h3>Safety, honestly</h3>
+      <p>Sahayak is a <b>screening and explanation aid — never a diagnosis</b>.
+      Dosage is read from the label, never invented. Danger signs always
+      trigger "refer immediately." Every answer ends by pointing to a doctor
+      or pharmacist. All health data stays on the device.</p>
+    </div>
+  </div>
+
+  <div class="kicker" style="margin-top:8mm">07 · Why we'll deliver</div>
+  <h2>Judged on execution? Good — that's what we brought.</h2>
+  <p class="lede">Between registering and submitting this form, we shipped a
+  working offline-AI Android app: engine abstraction, two complete
+  camera/voice modules, model hot-swapping, CI, and an installable release.
+  That is our answer to every "but can they build it in 30 hours?" — we
+  already build at that pace, and the phone-first tooling to keep that pace
+  through the Red Light windows is inside the app itself.</p>
+
+  <div class="callout" style="margin-top:6mm">
+    <p style="font-size:12px"><b>Sahayak — because the last mile of healthcare
+    shouldn't depend on the nearest cell tower.</b><br>
+    Repo, installable APK, and prototype video linked on the cover page.
+    We're ready to build.</p>
+  </div>
+  <div class="footer"><span>Sahayak · Phase 1 · iQOO Hackathon 2026</span><span>6 / 6</span></div>
+</div>
+
+</body>
+</html>
